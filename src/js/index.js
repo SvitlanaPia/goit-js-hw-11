@@ -15,6 +15,7 @@ let gallery = new SimpleLightbox('.gallery a', {
 
 const onSearchFormSubmit = async event => {
   event.preventDefault();
+  loadMoreBtnEl.classList.add('is-hidden');
 
   pixabayApi.query = event.target.elements.searchQuery.value.trim();
   pixabayApi.page = 1;
@@ -36,8 +37,6 @@ const onSearchFormSubmit = async event => {
       event.target.reset();
 
       galleryListEl.innerHTML = '';
-
-      loadMoreBtnEl.classList.add('is-hidden');
 
       return;
     }
