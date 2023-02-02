@@ -17,7 +17,8 @@ const onSearchFormSubmit = async event => {
   event.preventDefault();
   loadMoreBtnEl.classList.add('is-hidden');
 
-  pixabayApi.query = event.target.elements.searchQuery.value.trim();
+  const inputValue = event.target.elements.searchQuery.value.trim();
+  pixabayApi.query = inputValue;
   pixabayApi.page = 1;
 
   window.scrollTo({
@@ -26,6 +27,11 @@ const onSearchFormSubmit = async event => {
   });
 
   try {
+    if (!inputValue) {
+      Notify.failure('Please enter the value of images you are looking for.');
+      return;
+    }
+
     const response = await pixabayApi.findPhotosByQuery();
     const { data } = response;
 
